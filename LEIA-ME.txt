@@ -1,0 +1,30 @@
+MARTINS FERRAGENS — SITE COM WHATSAPP CONFIGURADO
+
+WHATSAPP OFICIAL
+- Número exibido: (83) 98748-5536
+- Link internacional usado pelo site: https://wa.me/5583987485536
+- O número foi configurado nos botões de contato, orçamento, entrega e no botão flutuante.
+- O orçamento abre uma mensagem preparada; o cliente ainda precisa revisar e enviar no WhatsApp.
+
+ARQUIVOS
+- index.html: site atualizado, catálogo e interações.
+- manifest.webmanifest: metadados para instalação PWA.
+- sw.js: cache básico com versão atualizada para evitar manter a página antiga em cache.
+- icons/: ícones do projeto original.
+
+COMO ABRIR
+1. Extraia o ZIP.
+2. Abra a pasta martins_ferragens_site no Visual Studio Code.
+3. Use a extensão Live Server para abrir index.html.
+4. Teste os botões de WhatsApp em um dispositivo com WhatsApp ou WhatsApp Web.
+
+ANTES DE PUBLICAR
+1. Confirme que o número (83) 98748-5536 é o WhatsApp correto da empresa.
+2. Confirme preços, disponibilidade, endereço, horários, formas de pagamento e regras de entrega.
+3. O catálogo/editor local não é um painel administrativo seguro nem sincroniza entre navegadores.
+4. Teste links, responsividade, carregamento e console do navegador antes de publicar.
+
+LIMITAÇÕES
+- O site prepara mensagens do WhatsApp; não confirma pedidos ou pagamentos automaticamente.
+- Não inclui backend ou banco de dados de produção.
+- O endereço e demais dados comerciais devem ser conferidos pela empresa antes da publicação.

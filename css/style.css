@@ -259,9 +259,8 @@
       .hero { padding-top: 14px; }
       .carousel { height: 225px; min-height: 0; border-radius: 14px; }
       .slide { background-position: 58% center; }
-      .carousel-control { width: 36px; height: 36px; }
-      .carousel-control.prev { left: 9px; }
-      .carousel-control.next { right: 9px; }
+      .carousel-control,
+      .rail-control { display: none; }
       .benefits { padding: 14px 5px; }
       .benefit { gap: 8px; padding: 0 7px; }
       .benefit-icon { flex-basis: 34px; width: 34px; height: 34px; }

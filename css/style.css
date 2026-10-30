@@ -121,11 +121,60 @@
     .drawer-head { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
     .drawer-head h2 { margin: 0; font-size: 1.2rem; }
     .drawer-close { border: 0; background: transparent; font-size: 1.5rem; }
-    .drawer-items { flex: 1; overflow: auto; padding: 12px 0; }
+    .drawer-items { flex: 1; min-height: 0; overflow: auto; padding: 12px 0; }
     .drawer-item { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: .8rem; }
     .drawer-item button { border: 0; background: none; color: var(--brand-dark); }
     .drawer-empty { color: var(--muted); font-size: .85rem; }
     .drawer-total { padding-top: 12px; border-top: 1px solid var(--line); font-weight: 850; }
+    .cart-checkout {
+      display: grid;
+      gap: 8px;
+      padding-top: 14px;
+    }
+
+    .cart-checkout label {
+      font-size: .8rem;
+      font-weight: 750;
+    }
+
+    .cart-checkout label span {
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 400;
+    }
+
+    .cart-checkout input,
+    .cart-checkout textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: .82rem;
+    }
+
+    .cart-checkout textarea {
+      min-height: 76px;
+      resize: vertical;
+    }
+
+    .cart-checkout input:focus,
+    .cart-checkout textarea:focus {
+      border-color: var(--brand);
+      outline: 3px solid var(--soft);
+    }
+
+    .cart-checkout-button {
+      width: 100%;
+      margin-top: 0;
+    }
+
+    .cart-checkout-button:disabled {
+      cursor: not-allowed;
+      opacity: .55;
+    }
     .old-price { color: #929292; font-size: .7rem; text-decoration: line-through; }
     .price { color: var(--brand-dark); font-size: 1.35rem; font-weight: 900; letter-spacing: -.04em; }
     .product .button { width: 100%; margin-top: 11px; padding: 10px; font-size: .72rem; }

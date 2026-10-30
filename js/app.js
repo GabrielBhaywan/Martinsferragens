@@ -114,14 +114,72 @@
           const product = byId.get(id);
           return `<div class="drawer-item"><span>${product.querySelector('h3').textContent}<br><small>${quantity} × ${product.querySelector('.price').textContent}</small></span><button type="button" data-remove-cart="${id}">Remover</button></div>`;
         }).join('') : '<p class="drawer-empty">Seu carrinho está vazio. Adicione produtos de exemplo para montar uma lista.</p>';
-        const total = entries.reduce((sum, [id, quantity]) => sum + Number(byId.get(id).querySelector('.price').textContent.replace('R$', '').replace('.', '').replace(',', '.').trim()) * quantity, 0);
-        document.querySelector('#cart-total').textContent = `Total: ${total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+        const prices = entries.map(([id]) => getProductPrice(byId.get(id)));
+        const total = entries.reduce((sum, [, quantity], index) => sum + (prices[index] || 0) * quantity, 0);
+        const totalNode = document.querySelector('#cart-total');
+        const checkoutButton = document.querySelector('#checkout-whatsapp');
+        totalNode.textContent = !entries.length
+          ? 'Adicione produtos para revisar seu pedido'
+          : prices.every(price => price !== null)
+          ? `Total estimado: ${total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`
+          : 'Total a confirmar com a loja';
+        checkoutButton.disabled = entries.length === 0;
         holder.querySelectorAll('[data-remove-cart]').forEach(button => button.addEventListener('click', () => {
           delete cart[button.dataset.removeCart];
           renderCart();
           updateCounts();
         }));
       }
+
+      function getProductPrice(product) {
+        const priceText = product.querySelector('.price').textContent;
+        const normalizedPrice = priceText
+          .replace(/[^\d,.-]/g, '')
+          .replace(/\./g, '')
+          .replace(',', '.');
+
+        if (!/\d/.test(normalizedPrice)) return null;
+
+        const price = Number(normalizedPrice);
+        return Number.isFinite(price) ? price : null;
+      }
+
+      document.querySelector('#cart-order-form').addEventListener('submit', event => {
+        event.preventDefault();
+
+        const entries = Object.entries(cart).filter(([, quantity]) => quantity > 0);
+        if (!entries.length || !event.currentTarget.reportValidity()) return;
+
+        const customerName = document.querySelector('#cart-customer-name').value.trim();
+        const notes = document.querySelector('#cart-order-notes').value.trim();
+        const items = entries.map(([id, quantity]) => {
+          const product = byId.get(id);
+          const productName = product.querySelector('h3').textContent.trim();
+          const priceText = product.querySelector('.price').textContent.trim();
+          const price = getProductPrice(product);
+          const subtotal = price === null
+            ? ''
+            : ` — subtotal ${(price * quantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+
+          return `• ${quantity}x ${productName} — ${priceText}${subtotal}`;
+        });
+        const prices = entries.map(([id]) => getProductPrice(byId.get(id)));
+        const total = entries.reduce((sum, [, quantity], index) => sum + (prices[index] || 0) * quantity, 0);
+        const totalLine = prices.every(price => price !== null)
+          ? `\nTotal estimado: ${total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`
+          : '\nTotal: a confirmar com a loja.';
+        const notesLine = notes ? `\n\nObservações: ${notes}` : '';
+        const message = [
+          'Olá, Martins Ferragens! Gostaria de revisar este pedido.',
+          '',
+          ...(customerName ? [`Cliente: ${customerName}`, ''] : []),
+          'Itens:',
+          ...items
+        ].join('\n') + totalLine + notesLine;
+        const whatsappUrl = `https://wa.me/5583987485536?text=${encodeURIComponent(message)}`;
+
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      });
 
       function renderFavorites() {
         const holder = document.querySelector('#favorite-items');

@@ -256,7 +256,16 @@
   <aside class="drawer" id="cart-drawer" aria-label="Carrinho de compras" aria-hidden="true">
     <div class="drawer-head"><h2>Meu carrinho</h2><button class="drawer-close" type="button" aria-label="Fechar carrinho">×</button></div>
     <div class="drawer-items" id="cart-items"></div>
-    <div class="drawer-total" id="cart-total">Total: R$ 0,00</div>
+    <form class="cart-checkout" id="cart-order-form">
+      <label for="cart-customer-name">Seu nome <span>(opcional)</span></label>
+      <input id="cart-customer-name" name="customerName" type="text" autocomplete="name" maxlength="80" placeholder="Como podemos chamar você?">
+
+      <label for="cart-order-notes">Observações <span>(opcional)</span></label>
+      <textarea id="cart-order-notes" name="orderNotes" rows="3" maxlength="600" placeholder="Informe medidas, marcas, endereço ou detalhes do pedido"></textarea>
+
+      <div class="drawer-total" id="cart-total">Total: R$ 0,00</div>
+      <button class="button cart-checkout-button" id="checkout-whatsapp" type="submit" disabled>Revisar pedido e ir para WhatsApp ↗</button>
+    </form>
   </aside>
   <aside class="drawer" id="favorites-drawer" aria-label="Produtos favoritos" aria-hidden="true">
     <div class="drawer-head"><h2>Meus favoritos</h2><button class="drawer-close" type="button" aria-label="Fechar favoritos">×</button></div>

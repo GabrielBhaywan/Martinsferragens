@@ -1,0 +1,32 @@
+.index2-launch-bar {
+    padding: 14px 16px;
+    background: #fff;
+    text-align: center;
+}
+
+.index2-launch { 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    min-height: 58px; 
+    margin: 0;
+    padding: 16px 28px; 
+    border: 3px solid #ffb3b3; 
+    border-radius: 14px; 
+    background: #d91515; 
+    color: #fff; 
+    box-shadow: 0 8px 24px #0005; 
+    font-size: 1.05rem; 
+    font-weight: 900; 
+    text-decoration: none; 
+    transition: background .2s, 
+    transform .2s; 
+}
+.index2-launch:hover { 
+    background: #b90000; 
+    transform: translateY(-2px); 
+}
+.index2-launch:focus-visible { 
+    outline: 3px solid #fff; 
+    outline-offset: 4px; 
+}

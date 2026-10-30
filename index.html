@@ -162,6 +162,26 @@ function playIntroSound(){
   }catch(err){console.info('Áudio da intro indisponível neste navegador.',err)}
 }
 $('#skipIntro').addEventListener('click',()=>{playIntroSound();$('#intro').classList.add('hide')});document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)setOverlay(o.id,false)}));document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.overlay.open').forEach(o=>setOverlay(o.id,false))});setTimeout(()=>$('#intro').classList.add('hide'),8000);
-if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  let pageReloading = false;
+
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (pageReloading) return;
+    pageReloading = true;
+    window.location.reload();
+  });
+
+  window.addEventListener('load', async () => {
+    try {
+      const registration = await navigator.serviceWorker.register('./sw.js', {
+        updateViaCache: 'none'
+      });
+
+      await registration.update();
+    } catch (error) {
+      console.info('Atualização offline indisponível neste momento.', error);
+    }
+  });
+}
 </script>
 </body></html>

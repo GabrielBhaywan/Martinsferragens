@@ -1,9 +1,8 @@
-const CACHE_NAME = 'martins-ferragens-v5-network-first';
+const CACHE_NAME = 'martins-ferragens-v6-network-first';
 
 const FILES_TO_CACHE = [
   './',
   './index.html',
-  './index2.html',
   './css/style.css',
   './css/landing-button.css',
   './js/app.js',
